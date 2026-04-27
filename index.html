@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRUDS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="cruds">
+    <div class="head">
+      <h1>CRUDS</h1>
+      <P>Product Management System </P>
+    </div>
+    <div class="input">
+      <input type="text" placeholder="Title" id="title">
+      <div class="price">
+        <input onkeyup="getTotal()" placeholder="Price" id="price"> 
+        <input onkeyup="getTotal()" placeholder="Taxes" id="taxes">
+        <input onkeyup="getTotal()" placeholder="Ads" id="ads">
+        <input onkeyup="getTotal()" placeholder="Discount" id="discount">
+        <small id="total"></small>
+      </div>
+      <input type="text" placeholder="Count" id="count">
+      <input type="text" placeholder="Category" id="category">
+      <button id="submit">Create</button>
+    </div>
+    <div class="output">
+      <div class="searchBlock">
+        <input onkeyup="searchInData(this.value)"  type="text" placeholder="Search" id="search">
+        <div class="btnSearch">
+          <button onclick="getSearchMood(this.id)" id="searchTitle">Search By Title</button>
+          <button onclick="getSearchMood(this.id)" id="searchCategory">Search By Category</button>
+        </div>
+      </div>
+      <div id="deleteAll">
+        
+      </div>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Price</th>
+          <th>Taxes</th>
+          <th>Ads</th>
+          <th>Discount</th>
+          <th>Total</th>
+          <th>Category</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+        <tbody id="tbody">
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <footer>
+    <p>Developed by <span class="my-name">Mark Ehab</span></p>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>
