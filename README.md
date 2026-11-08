@@ -31,7 +31,7 @@ A small product management app I built with plain HTML, CSS and JavaScript. You 
 
 1. Clone the repo:
    ```bash
-   git clone https://github.com/Markehab1/Product-mangement-system-CRUDS-.git
+   git clone https://github.com/Markehab1/Product-management-system-CRUDS-.git
    ```
 2. Open `index.html` in your browser.
 
