@@ -10,50 +10,133 @@
   <div class="cruds">
     <div class="head">
       <h1>CRUDS</h1>
-      <P>Product Management System </P>
+      <p>Product Management System</p>
+      <button type="button" id="themeBtn" class="theme-btn">Light mode</button>
     </div>
-    <div class="input">
-      <input type="text" placeholder="Title" id="title">
+
+    <form class="input" id="productForm" novalidate>
+      <div class="field">
+        <label for="title">Title</label>
+        <input type="text" placeholder="Title" id="title" aria-describedby="titleError">
+        <small class="error" id="titleError"></small>
+      </div>
       <div class="price">
-        <input onkeyup="getTotal()" placeholder="Price" id="price"> 
-        <input onkeyup="getTotal()" placeholder="Taxes" id="taxes">
-        <input onkeyup="getTotal()" placeholder="Ads" id="ads">
-        <input onkeyup="getTotal()" placeholder="Discount" id="discount">
+        <div class="field">
+          <label for="price">Price</label>
+          <input type="number" min="0" step="any" placeholder="0" id="price" aria-describedby="priceError">
+          <small class="error" id="priceError"></small>
+        </div>
+        <div class="field">
+          <label for="taxes">Taxes</label>
+          <input type="number" min="0" step="any" placeholder="0" id="taxes" aria-describedby="taxesError">
+          <small class="error" id="taxesError"></small>
+        </div>
+        <div class="field">
+          <label for="ads">Ads</label>
+          <input type="number" min="0" step="any" placeholder="0" id="ads" aria-describedby="adsError">
+          <small class="error" id="adsError"></small>
+        </div>
+        <div class="field">
+          <label for="discount">Discount</label>
+          <input type="number" min="0" step="any" placeholder="0" id="discount" aria-describedby="discountError">
+          <small class="error" id="discountError"></small>
+        </div>
         <small id="total"></small>
       </div>
-      <input type="text" placeholder="Count" id="count">
-      <input type="text" placeholder="Category" id="category">
-      <button id="submit">Create</button>
+      <div class="field">
+        <label for="count">Quantity</label>
+        <input type="number" min="1" max="1000" step="1" value="1" id="count" aria-describedby="countError">
+        <small class="error" id="countError"></small>
+      </div>
+      <div class="field">
+        <label for="category">Category</label>
+        <input type="text" placeholder="Category" id="category" aria-describedby="categoryError">
+        <small class="error" id="categoryError"></small>
+      </div>
+      <div class="form-buttons">
+        <button type="submit" id="submit">Create</button>
+        <button type="button" id="cancelBtn" class="secondary" hidden>Cancel</button>
+      </div>
+    </form>
+
+    <div class="stats">
+      <div class="card">
+        <span>Products</span>
+        <strong id="statProducts">0</strong>
+      </div>
+      <div class="card">
+        <span>Units in stock</span>
+        <strong id="statUnits">0</strong>
+      </div>
+      <div class="card">
+        <span>Inventory value</span>
+        <strong id="statValue">0</strong>
+      </div>
     </div>
+
     <div class="output">
       <div class="searchBlock">
-        <input onkeyup="searchInData(this.value)"  type="text" placeholder="Search" id="search">
+        <input type="search" placeholder="Search By Title" id="search" aria-label="Search">
         <div class="btnSearch">
-          <button onclick="getSearchMood(this.id)" id="searchTitle">Search By Title</button>
-          <button onclick="getSearchMood(this.id)" id="searchCategory">Search By Category</button>
+          <button type="button" id="searchTitle" class="active" aria-pressed="true">Search By Title</button>
+          <button type="button" id="searchCategory" aria-pressed="false">Search By Category</button>
         </div>
       </div>
-      <div id="deleteAll">
-        
+
+      <div class="toolbar">
+        <div class="sort-mobile">
+          <label for="sortSelect">Sort by</label>
+          <select id="sortSelect">
+            <option value="id-asc">ID: oldest first</option>
+            <option value="id-desc">ID: newest first</option>
+            <option value="title-asc">Title: A to Z</option>
+            <option value="title-desc">Title: Z to A</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
+            <option value="total-asc">Total: low to high</option>
+            <option value="total-desc">Total: high to low</option>
+            <option value="count-asc">Qty: low to high</option>
+            <option value="count-desc">Qty: high to low</option>
+            <option value="category-asc">Category: A to Z</option>
+            <option value="category-desc">Category: Z to A</option>
+          </select>
+        </div>
+        <button type="button" id="exportBtn" class="secondary">Export CSV</button>
+        <button type="button" id="deleteAll" class="danger" hidden>Delete All</button>
       </div>
-      <table>
-        <tr>
-          <th>ID</th>
-          <th>Title</th>
-          <th>Price</th>
-          <th>Taxes</th>
-          <th>Ads</th>
-          <th>Discount</th>
-          <th>Total</th>
-          <th>Category</th>
-          <th>Update</th>
-          <th>Delete</th>
-        </tr>
-        <tbody id="tbody">
-        </tbody>
-      </table>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-sort="id"><button type="button" class="sort" data-sort="id">ID</button></th>
+              <th data-sort="title"><button type="button" class="sort" data-sort="title">Title</button></th>
+              <th data-sort="price"><button type="button" class="sort" data-sort="price">Price</button></th>
+              <th>Taxes</th>
+              <th>Ads</th>
+              <th>Discount</th>
+              <th data-sort="total"><button type="button" class="sort" data-sort="total">Total</button></th>
+              <th data-sort="count"><button type="button" class="sort" data-sort="count">Qty</button></th>
+              <th data-sort="category"><button type="button" class="sort" data-sort="category">Category</button></th>
+              <th>Update</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination" id="pagination" hidden>
+        <button type="button" id="prevBtn" class="secondary">Prev</button>
+        <span id="pageInfo"></span>
+        <button type="button" id="nextBtn" class="secondary">Next</button>
+      </div>
     </div>
   </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
   <footer>
     <p>Developed by <span class="my-name">Mark Ehab</span></p>
   </footer>
